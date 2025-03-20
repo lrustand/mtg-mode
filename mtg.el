@@ -77,7 +77,7 @@ The chosen sets for the cards are an attempt to return the most up-to-date recog
   "Load the bulk oracle data."
   (unless mtg-oracle-data
     (when (mtg--oracle-outdated-p)
-        (mtg-scryfall-download-bulk-data)))
+        (mtg-scryfall-download-bulk-data))
     (let ((json-array-type 'list))
       (setq mtg-oracle-data (json-read-file mtg-oracle-json-file)))))
 
