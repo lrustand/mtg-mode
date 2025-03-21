@@ -6,9 +6,18 @@
 
 ;;;; General purpose functions
 
+(defun mtg-scryfall-api--ensure-absolute (url)
+  "Prefix URL with Scryfall domain if URL is relative."
+  (let ((base "https://api.scryfall.com"))
+    (if (string-prefix-p base url)
+        url
+      (concat base url))))
+
 (defun mtg-scryfall-api-get (url)
-  "Fetch a Scryfall API endpoint."
-  (let* ((buffer (url-retrieve-synchronously (concat "https://api.scryfall.com" url)))
+  "Fetch a Scryfall API endpoint.
+URL can be either absolute or relative."
+  (let* ((url (mtg-scryfall-api--ensure-absolute url))
+         (buffer (url-retrieve-synchronously url))
          (json-array-type 'list)
          json-data)
     (with-current-buffer buffer
