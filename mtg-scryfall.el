@@ -1,7 +1,6 @@
 (require 'url)
 (require 'json)
 (require 'cl-lib)
-(require 'mtg)
 
 
 ;;;; General purpose functions
